@@ -1,0 +1,129 @@
+@model AlquilerApp.Models.Persona
+
+@{
+ViewData["Title"] = "Crear Persona";
+}
+
+<!-- Carga de Bootstrap (NOTA: En un proyecto ASP.NET Core real, este enlace debería estar en el _Layout.cshtml) -->
+
+<link href="https://www.google.com/search?q=https://cdn.jsdelivr.net/npm/bootstrap%405.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- Estilos personalizados para el formulario centrado -->
+
+<style>
+body {
+background-color: #f7f9fc;
+font-family: 'Inter', sans-serif;
+}
+.form-container {
+max-width: 550px; /* max-w-xl /
+margin-top: 2rem;
+margin-bottom: 3rem;
+padding: 2rem; / p-8 /
+background-color: #ffffff;
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); / shadow-2xl /
+border-radius: 0.75rem; / rounded-xl /
+}
+.form-control-custom {
+padding: 0.75rem 1rem;
+border-radius: 0.375rem; / rounded-md /
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-control-custom:focus {
+border-color: #4f46e5; / indigo-600 /
+box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.25); / focus:ring-indigo-500 */
+}
+</style>
+
+<div class="form-container mx-auto">
+<h1 class="h3 fw-bolder text-primary mb-4">Crear Nueva Persona</h1>
+<hr class="mb-4 border-primary-subtle" />
+
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+    <!-- Resumen de Validación (Alerta) -->
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger font-medium p-3 mb-4 rounded-3" role="alert"></div>
+
+    <!-- Fila 1: NumIdentidad -->
+    <div class="mb-3">
+        <label asp-for="NumIdentidad" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="NumIdentidad" class="form-control form-control-custom" />
+        <span asp-validation-for="NumIdentidad" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 2: Nombres -->
+    <div class="mb-3">
+        <label asp-for="Nombres" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="Nombres" class="form-control form-control-custom" />
+        <span asp-validation-for="Nombres" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 3: Apellidos -->
+    <div class="mb-3">
+        <label asp-for="Apellidos" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="Apellidos" class="form-control form-control-custom" />
+        <span asp-validation-for="Apellidos" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 4: Correo Electrónico (Email) -->
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="Email" type="email" class="form-control form-control-custom" />
+        <span asp-validation-for="Email" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 5: Teléfono de Contacto (Telefono) -->
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="Telefono" class="form-control form-control-custom" />
+        <span asp-validation-for="Telefono" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+    
+    <!-- Fila 6: Fecha de Nacimiento -->
+    <div class="mb-3">
+        <label asp-for="FechaNacimiento" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="FechaNacimiento" type="date" class="form-control form-control-custom" />
+        <span asp-validation-for="FechaNacimiento" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 7: Dirección -->
+    <div class="mb-3">
+        <label asp-for="Direccion" class="form-label fw-medium text-secondary"></label>
+        <input asp-for="Direccion" class="form-control form-control-custom" />
+        <span asp-validation-for="Direccion" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 8: Dropdown para Sexo (FK) -->
+    <div class="mb-3">
+        <label asp-for="IdSexo" class="form-label fw-medium text-secondary"></label>
+        <select asp-for="IdSexo" class="form-select form-control-custom" asp-items="ViewBag.IdSexo">
+            <option value="">-- Seleccionar Sexo --</option>
+        </select>
+        <span asp-validation-for="IdSexo" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Fila 9: Dropdown para Ciudad (FK) -->
+    <div class="mb-4">
+        <label asp-for="IdCiudad" class="form-label fw-medium text-secondary"></label>
+        <select asp-for="IdCiudad" class="form-select form-control-custom" asp-items="ViewBag.IdCiudad">
+            <option value="">-- Seleccionar Ciudad --</option>
+        </select>
+        <span asp-validation-for="IdCiudad" class="invalid-feedback d-block small mt-1"></span>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="d-flex justify-content-end gap-3 pt-3">
+        <a asp-action="Index" class="btn btn-secondary fw-semibold py-2 px-4 shadow-sm">Volver a la Lista</a>
+        <button type="submit" class="btn btn-primary fw-semibold py-2 px-4 shadow-sm">
+            Guardar Persona
+        </button>
+    </div>
+</form>
+
+
+</div>
+
+@section Scripts {
+<!-- Script de Bootstrap y Validación (Asumiendo que están en el layout) -->
+<script src="https://www.google.com/search?q=https://cdn.jsdelivr.net/npm/bootstrap%405.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

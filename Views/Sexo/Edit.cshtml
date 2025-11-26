@@ -1,0 +1,41 @@
+@model AlquilerApp.Models.Sexo
+
+@{
+    ViewData["Title"] = "Editar Género/Sexo";
+}
+
+<div class="container my-5">
+    <h1 class="display-4 mb-4 text-warning fw-bold">Editar Género / Sexo</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <input type="hidden" asp-for="IdSexo" />
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="SexoNombre" class="form-label fw-bold"></label>
+                        <input asp-for="SexoNombre" class="form-control" />
+                        <span asp-validation-for="SexoNombre" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mt-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-warning btn-lg shadow-sm">
+                            <i class="fas fa-edit"></i> Actualizar
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

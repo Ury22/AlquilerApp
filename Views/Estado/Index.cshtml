@@ -1,0 +1,22 @@
+@model IEnumerable<AlquilerApp.Models.Estado>
+
+<h1>Estados de Alquiler</h1>
+<p><a asp-action="Create" class="btn btn-primary">Nuevo Estado</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.EstadoNombre</td> <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEstado">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEstado">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

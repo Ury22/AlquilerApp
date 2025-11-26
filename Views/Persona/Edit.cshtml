@@ -1,0 +1,158 @@
+@model AlquilerApp.Models.ViewModels.PersonaRolesViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Editar Persona";
+    
+    // Recuperamos las listas de forma segura
+    var listaSexo = ViewData["IdSexo"] as SelectList ?? new SelectList(Enumerable.Empty<SelectListItem>());
+    var listaCiudad = ViewData["IdCiudad"] as SelectList ?? new SelectList(Enumerable.Empty<SelectListItem>());
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h3 class="mb-0 fw-bold"><i class="fas fa-user-edit me-2"></i>Editar Persona</h3>
+            <small class="opacity-75">@Model.Persona.Nombres @Model.Persona.Apellidos (ID: @Model.Persona.NumIdentidad)</small>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                
+                <!-- Campo oculto para la PK -->
+                <input type="hidden" asp-for="Persona.NumIdentidad" />
+
+                <div class="row">
+                    <!-- COLUMNA 1: Información Personal -->
+                    <div class="col-md-6 border-end">
+                        <h5 class="text-primary mb-3 border-bottom pb-2">Datos Personales</h5>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.Nombres" class="form-label fw-bold text-muted small">Nombres</label>
+                                    <input asp-for="Persona.Nombres" class="form-control" />
+                                    <span asp-validation-for="Persona.Nombres" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.Apellidos" class="form-label fw-bold text-muted small">Apellidos</label>
+                                    <input asp-for="Persona.Apellidos" class="form-control" />
+                                    <span asp-validation-for="Persona.Apellidos" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.FechaNacimiento" class="form-label fw-bold text-muted small">Fecha Nacimiento</label>
+                                    <input asp-for="Persona.FechaNacimiento" class="form-control" type="date" />
+                                    <span asp-validation-for="Persona.FechaNacimiento" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.Telefono" class="form-label fw-bold text-muted small">Teléfono</label>
+                                    <input asp-for="Persona.Telefono" class="form-control" />
+                                    <span asp-validation-for="Persona.Telefono" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Persona.Email" class="form-label fw-bold text-muted small">Correo Electrónico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input asp-for="Persona.Email" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Persona.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Persona.Direccion" class="form-label fw-bold text-muted small">Dirección</label>
+                            <textarea asp-for="Persona.Direccion" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Persona.Direccion" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA 2: Ubicación y Roles -->
+                    <div class="col-md-6 ps-md-4">
+                        <h5 class="text-primary mb-3 border-bottom pb-2">Ubicación y Sistema</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.IdSexo" class="form-label fw-bold text-muted small">Género</label>
+                                    <select asp-for="Persona.IdSexo" class="form-select" asp-items="listaSexo"></select>
+                                    <span asp-validation-for="Persona.IdSexo" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Persona.IdCiudad" class="form-label fw-bold text-muted small">Ciudad</label>
+                                    <select asp-for="Persona.IdCiudad" class="form-select" asp-items="listaCiudad"></select>
+                                    <span asp-validation-for="Persona.IdCiudad" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GESTIÓN DE ROLES CON CHECKBOXES -->
+                        <div class="card bg-light border-0">
+                            <div class="card bg-light border-0">
+    <div class="card-body">
+        <h6 class="card-title fw-bold text-dark mb-3">Asignación de Roles</h6>
+        
+        <div class="form-group">
+            <label class="form-label text-muted small">Seleccione el Rol</label>
+            
+            <select class="form-select" name="RolesAsignadosIds">
+                <option value="">-- Seleccione un Rol --</option>
+                
+                @if (Model.TodosLosRoles != null)
+                {
+                    foreach (var rol in Model.TodosLosRoles)
+                    {
+                        /* Verificamos si este rol ya estaba asignado para pre-seleccionarlo */
+                        var isSelected = Model.RolesAsignadosIds != null && Model.RolesAsignadosIds.Contains(rol.IdRol);
+                        
+                        if (isSelected)
+                        {
+                             <option value="@rol.IdRol" selected>@rol.RolNombre</option>
+                        }
+                        else
+                        {
+                             <option value="@rol.IdRol">@rol.RolNombre</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <small class="text-muted mt-2 d-block fst-italic">
+            <i class="fas fa-info-circle me-1"></i> Seleccione si la persona es Inquilino o Propietario.
+        </small>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-success px-4 shadow-sm">
+                        <i class="fas fa-save me-2"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```

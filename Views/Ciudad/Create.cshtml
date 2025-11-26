@@ -1,0 +1,42 @@
+@model AlquilerApp.Models.Ciudad
+
+@{
+    ViewData["Title"] = "Crear Ciudad";
+}
+
+<h1>Crear Ciudad</h1>
+
+<h4>Ciudad</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CiudadNombre" class="control-label"></label>
+                <input asp-for="CiudadNombre" class="form-control" />
+                <span asp-validation-for="CiudadNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPais" class="control-label"></label>
+                <!-- Uso de ViewBag, que es equivalente a ViewData para los Tag Helpers -->
+                <select asp-for="IdPais" class="form-control" asp-items="ViewBag.IdPais">
+                    <!-- Opcional: Se recomienda añadir una opción para forzar la selección -->
+                    <option value="">-- Seleccionar País --</option> 
+                </select>
+                <span asp-validation-for="IdPais" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,36 @@
+## Ignore Visual Studio temporary files, build outputs, and user-specific files
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Build folders
+bin/
+obj/
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+
+# Publish output
+publish/
+
+# Logs
+*.log
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# JetBrains Rider
+*.sln.iml
+
+# dotnet tools
+.nuget/

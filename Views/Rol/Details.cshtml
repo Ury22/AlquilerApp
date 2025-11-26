@@ -1,0 +1,32 @@
+@model AlquilerApp.Models.Rol
+
+@{
+    ViewData["Title"] = "Detalles de Rol";
+}
+
+<div class="container my-5">
+    <h1 class="display-4 mb-4 text-info fw-bold">Detalles de Rol</h1>
+    <hr />
+    
+    <div class="card shadow-lg p-4 mb-4">
+        <dl class="row">
+            
+            <dt class = "col-sm-3 text-muted">
+                @Html.DisplayNameFor(model => model.RolNombre)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                @Html.DisplayFor(model => model.RolNombre)
+            </dd>
+            
+        </dl>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.IdRol" class="btn btn-warning btn-lg shadow-sm">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm">
+            <i class="fas fa-arrow-left"></i> Volver a la Lista
+        </a>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+@model AlquilerApp.Models.Vivienda
+
+@{
+ViewData["Title"] = "Detalle de Vivienda";
+}
+
+<!-- Contenedor principal para centrar y limitar el ancho -->
+
+<div class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8 col-md-10">
+<!-- Tarjeta principal para la vista de detalles -->
+<div class="card shadow-lg p-4 rounded-3 border-0">
+
+            <h1 class="fs-3 fw-bold text-dark mb-2">@ViewData["Title"]</h1>
+            <h4 class="fs-6 text-secondary mb-4">Información completa de la vivienda: <span class="fw-bolder text-primary">@Model.CodigoVivienda</span></h4>
+            <hr class="mb-4"/>
+
+            <!-- DETALLES AGRUPADOS -->
+            <div class="mb-4">
+                <h5 class="fw-semibold text-primary border-bottom pb-2 mb-3"><i class="fas fa-info-circle me-2"></i> Identificación y Propietario</h5>
+                
+                <dl class="row mb-0">
+                    <!-- Código de Vivienda -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.CodigoVivienda)</dt>
+                    <dd class="col-sm-8 text-dark">@Html.DisplayFor(model => model.CodigoVivienda)</dd>
+                    
+                    <div class="col-12"><hr class="my-2" /></div>
+
+                    <!-- Propietario -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.PropietarioPersona)</dt>
+                    <dd class="col-sm-8 text-dark fw-bolder">
+                        @(Model.PropietarioPersona?.Nombres ?? "N/A") @(Model.PropietarioPersona?.Apellidos ?? "")
+                        <span class="text-secondary ms-2 small">(@Html.DisplayFor(model => model.PropietarioPersona))</span>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="fw-semibold text-primary border-bottom pb-2 mb-3"><i class="fas fa-map-marker-alt me-2"></i> Ubicación</h5>
+                
+                <dl class="row mb-0">
+                    <!-- Número de Vivienda -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.NumVivienda)</dt>
+                    <dd class="col-sm-8 text-dark">@Html.DisplayFor(model => model.NumVivienda)</dd>
+                    
+                    <!-- Calle y Bloque -->
+                    <dt class="col-sm-4 fw-bold">Calle / Bloque</dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.NumCalle) / @Html.DisplayFor(model => model.NumBloque)
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="fw-semibold text-primary border-bottom pb-2 mb-3"><i class="fas fa-house-user me-2"></i> Estructura y Capacidad</h5>
+                
+                <dl class="row mb-0">
+                    <!-- Capacidad Personas -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.CapacidadPersonas)</dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.CapacidadPersonas) <i class="fas fa-users ms-1"></i>
+                    </dd>
+                    
+                    <!-- Dormitorios -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.CantDormitorios)</dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.CantDormitorios) <i class="fas fa-bed ms-1"></i>
+                    </dd>
+                    
+                    <!-- Baños -->
+                    <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.CantBanios)</dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.CantBanios) <i class="fas fa-bath ms-1"></i>
+                    </dd>
+                </dl>
+            </div>
+
+            <!-- Descripción (Sección de ancho completo) -->
+            <div class="mt-4 pt-4 border-top">
+                <h5 class="fw-semibold text-primary border-bottom pb-2 mb-3"><i class="fas fa-file-alt me-2"></i> Descripción de la Vivienda</h5>
+                <p class="text-dark text-justify">@Html.DisplayFor(model => model.DescripcionVivienda)</p>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="mt-4 d-flex justify-content-between pt-3 border-top">
+                <a asp-action="Edit" asp-route-id="@Model.CodigoVivienda" class="btn btn-primary shadow-sm">
+                    <i class="fas fa-edit me-2"></i> Editar Vivienda
+                </a>
+                <a asp-action="Index" class="btn btn-secondary shadow-sm">
+                    <i class="fas fa-arrow-left me-2"></i> Volver a la Lista
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+@section Scripts {
+<!-- Aseguramos la carga de Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+}

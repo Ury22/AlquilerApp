@@ -1,0 +1,157 @@
+@model AlquilerApp.Models.Alquiler
+
+@{
+    ViewData["Title"] = "Nuevo Contrato de Alquiler";
+}
+
+<!-- Contenedor Principal con Sombra Elevada y Esquinas Redondeadas -->
+<div class="container mx-auto p-6 md:p-10 bg-white rounded-xl shadow-2xl max-w-6xl mt-8 mb-12 border border-gray-100">
+    
+    <!-- Cabecera -->
+    <header class="mb-8 pb-4 border-b border-blue-100">
+        <h1 class="text-4xl font-extrabold text-blue-800">
+            <i class="fas fa-file-signature mr-3 text-blue-500"></i> @ViewData["Title"]
+        </h1>
+        <p class="text-lg text-gray-500 mt-2">Complete los detalles para registrar un nuevo contrato de arrendamiento.</p>
+    </header>
+
+    <form asp-action="Create" class="space-y-8">
+        <!-- Resumen de Validación -->
+        <div asp-validation-summary="ModelOnly" class="text-red-600 font-medium p-4 bg-red-50 border-l-4 border-red-400 rounded-lg"></div>
+
+        <!-- SECCIÓN 1: VIVIENDA Y PARTES INVOLUCRADAS -->
+        <h2 class="text-2xl font-semibold text-blue-700 pt-4 pb-2 border-b border-blue-100">
+            1. Vivienda y Partes
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- 1. Vivienda (FK) - Asegurado que está presente -->
+            <div>
+                <label asp-for="CodigoVivienda" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <select asp-for="CodigoVivienda" 
+                            class="appearance-none block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 pr-10 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                            asp-items="ViewBag.Viviendas">
+                        <option value="">-- Seleccione Vivienda --</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+                <span asp-validation-for="CodigoVivienda" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 2. Propietario (FK) -->
+            <div>
+                <label asp-for="Propietario" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <select asp-for="Propietario" 
+                            class="appearance-none block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 pr-10 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                            asp-items="ViewBag.Propietarios">
+                        <option value="">-- Seleccione Propietario --</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+                <span asp-validation-for="Propietario" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 3. Inquilino (FK) -->
+            <div>
+                <label asp-for="Inquilino" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <select asp-for="Inquilino" 
+                            class="appearance-none block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 pr-10 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                            asp-items="ViewBag.Inquilinos">
+                        <option value="">-- Seleccione Inquilino --</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <span asp-validation-for="Inquilino" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: DETALLES DEL CONTRATO Y FECHAS -->
+        <h2 class="text-2xl font-semibold text-blue-700 pt-8 pb-2 border-b border-blue-100">
+            2. Fechas y Montos
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- 4. Fecha Alquiler (Contrato) -->
+            <div>
+                <label asp-for="FechaAlquiler" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <input asp-for="FechaAlquiler" type="date" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="FechaAlquiler" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 5. Fecha Inicio -->
+            <div>
+                <label asp-for="FechaInicio" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <input asp-for="FechaInicio" type="date" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="FechaInicio" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 6. Fecha Finalización -->
+            <div>
+                <label asp-for="FechaFinalizacion" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <input asp-for="FechaFinalizacion" type="date" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="FechaFinalizacion" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+            
+            <!-- 7. Cuota Mensual -->
+            <div>
+                <label asp-for="CuotaMensual" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+                    <input asp-for="CuotaMensual" type="number" step="0.01" class="pl-8 mt-1 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+                <span asp-validation-for="CuotaMensual" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 8. Depósito Garantía -->
+            <div>
+                <label asp-for="DepositoGarantia" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+                    <input asp-for="DepositoGarantia" type="number" step="0.01" class="pl-8 mt-1 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+                <span asp-validation-for="DepositoGarantia" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+
+            <!-- 9. Estado (FK) -->
+            <div>
+                <label asp-for="IdEstado" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <div class="relative">
+                    <select asp-for="IdEstado" 
+                            class="appearance-none block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 pr-10 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                            asp-items="ViewBag.Estados">
+                        <option value="">-- Seleccione Estado --</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                </div>
+                <span asp-validation-for="IdEstado" class="mt-2 text-xs text-red-500 block"></span>
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-col sm:flex-row justify-between pt-8 border-t border-gray-100 mt-8">
+            <button type="submit" class="w-full sm:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-[1.02] active:scale-100 mb-4 sm:mb-0">
+                <i class="fas fa-check-circle mr-2"></i> Crear Contrato
+            </button>
+            <a asp-action="Index" class="w-full sm:w-auto inline-flex items-center justify-center text-gray-700 font-semibold py-3 px-8 rounded-xl border border-gray-400 hover:bg-gray-100 transition duration-300 shadow-md">
+                <i class="fas fa-arrow-left mr-2"></i> Volver a la Lista
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

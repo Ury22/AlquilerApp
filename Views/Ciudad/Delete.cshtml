@@ -1,0 +1,52 @@
+@model AlquilerApp.Models.Ciudad
+
+@{
+    ViewData["Title"] = "Eliminar Ciudad";
+}
+
+<div class="container my-5">
+    <h1 class="display-4 mb-4 text-danger fw-bold">Eliminar Ciudad</h1>
+
+    <h3 class="text-secondary mb-4">¿Estás seguro que deseas eliminar esta ciudad?</h3>
+    <hr />
+    
+    <div class="card shadow-lg p-4 bg-light">
+        <dl class="row">
+            
+            <dt class = "col-sm-3 text-muted">
+                <!-- Muestra "Ciudad" -->
+                @Html.DisplayNameFor(model => model.CiudadNombre)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                @Html.DisplayFor(model => model.CiudadNombre)
+            </dd>
+            
+            <dt class = "col-sm-3 text-muted">
+                <!-- Muestra "País" -->
+                @Html.DisplayNameFor(model => model.Pais)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                <!-- CLAVE: Acceso seguro al nombre del país -->
+                @(Model.Pais?.PaisNombre ?? "N/A")
+            </dd>
+            
+            <!-- Opcional: Mostrar IDs si es necesario para depuración -->
+             <dt class = "col-sm-3 text-muted mt-3 pt-3 border-top">
+                ID de Ciudad
+            </dt>
+            <dd class = "col-sm-9 mt-3 pt-3 border-top">
+                @Html.DisplayFor(model => model.IdCiudad)
+            </dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="IdCiudad" />
+        <button type="submit" class="btn btn-danger btn-lg shadow-sm">
+            <i class="fas fa-trash-alt"></i> Eliminar
+        </button>
+        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm">
+            <i class="fas fa-arrow-left"></i> Cancelar y Volver
+        </a>
+    </form>
+</div>

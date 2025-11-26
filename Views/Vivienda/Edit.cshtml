@@ -1,0 +1,125 @@
+@model AlquilerApp.Models.Vivienda
+
+@{
+ViewData["Title"] = "Editar Vivienda";
+}
+
+<!-- Contenedor principal para centrar y limitar el ancho -->
+
+<div class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8 col-md-10">
+<!-- Tarjeta principal para el formulario de edición -->
+<div class="card shadow-lg p-4 rounded-3 border-0">
+
+            <h1 class="fs-3 fw-bold text-dark mb-2">
+                <i class="fas fa-tools me-2 text-primary"></i> @ViewData["Title"]
+            </h1>
+            <h4 class="fs-6 text-secondary mb-4">Modifique los detalles de la vivienda seleccionada.</h4>
+            <hr class="mb-4"/>
+
+            <!-- Formulario de Edición -->
+            <form asp-action="Edit">
+                <!-- Resumen de Validación General -->
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger p-3 mb-4 rounded-3"></div>
+                
+                <!-- Campo oculto para la clave primaria -->
+                <input type="hidden" asp-for="CodigoVivienda" />
+
+                <!-- SECCIÓN 1: Identificación y Propietario -->
+                <div class="row g-3 mb-4">
+                    <!-- Código Vivienda (PK - Deshabilitado) -->
+                    <div class="col-md-6">
+                        <label asp-for="CodigoVivienda" class="form-label fw-bold"></label>
+                        <input asp-for="CodigoVivienda" class="form-control" readonly />
+                    </div>
+                    
+                    <!-- Propietario (FK - Dropdown) -->
+                    <div class="col-md-6">
+                        <label asp-for="Propietario" class="form-label fw-bold">Propietario (Persona con Rol)</label>
+                        <!-- El ViewBag.Propietario debe contener la lista de SelectListItem -->
+                        <select asp-for="Propietario" class="form-select" asp-items="ViewBag.Propietario">
+                            <option value="">-- Seleccionar Propietario --</option>
+                        </select>
+                        <span asp-validation-for="Propietario" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: Ubicación -->
+                <fieldset class="border p-3 rounded-3 mb-4">
+                    <legend class="float-none w-auto px-2 fs-6 fw-bold text-primary">
+                        <i class="fas fa-map-marker-alt me-1"></i> Ubicación
+                    </legend>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="NumVivienda" class="form-label"></label>
+                            <input asp-for="NumVivienda" class="form-control" />
+                            <span asp-validation-for="NumVivienda" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="NumCalle" class="form-label"></label>
+                            <input asp-for="NumCalle" class="form-control" />
+                            <span asp-validation-for="NumCalle" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="NumBloque" class="form-label"></label>
+                            <input asp-for="NumBloque" class="form-control" />
+                            <span asp-validation-for="NumBloque" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECCIÓN 3: Habitabilidad y Espacios -->
+                <fieldset class="border p-3 rounded-3 mb-4">
+                    <legend class="float-none w-auto px-2 fs-6 fw-bold text-primary">
+                        <i class="fas fa-house-user me-1"></i> Detalles de Habitabilidad
+                    </legend>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="CapacidadPersonas" class="form-label"></label>
+                            <input asp-for="CapacidadPersonas" class="form-control" />
+                            <span asp-validation-for="CapacidadPersonas" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="CantDormitorios" class="form-label"></label>
+                            <input asp-for="CantDormitorios" class="form-control" />
+                            <span asp-validation-for="CantDormitorios" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="CantBanios" class="form-label"></label>
+                            <input asp-for="CantBanios" class="form-control" />
+                            <span asp-validation-for="CantBanios" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECCIÓN 4: Descripción -->
+                <div class="mb-4">
+                    <label asp-for="DescripcionVivienda" class="form-label fw-bold"></label>
+                    <textarea asp-for="DescripcionVivienda" rows="4" class="form-control"></textarea>
+                    <span asp-validation-for="DescripcionVivienda" class="text-danger small"></span>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="d-flex justify-content-between pt-3 border-top mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-save me-2"></i> Guardar Cambios
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg shadow-sm">
+                        <i class="fas fa-arrow-left me-2"></i> Volver a la Lista
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+@section Scripts {
+<!-- Carga de Font Awesome para iconos -->
+<link rel="stylesheet" href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- Carga de scripts de validación de Razor (invariante) -->
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

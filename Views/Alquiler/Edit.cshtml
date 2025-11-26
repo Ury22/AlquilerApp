@@ -1,0 +1,103 @@
+@model AlquilerApp.Models.Alquiler
+
+@{
+    ViewData["Title"] = "Editar Contrato de Alquiler";
+}
+
+<h1 class="text-3xl font-bold mb-6 text-gray-800">Editar Contrato de Alquiler</h1>
+
+<hr class="mb-6"/>
+<div class="md:w-1/2 mx-auto">
+    <form asp-action="Edit" class="bg-white shadow-xl rounded-lg p-8">
+        <div asp-validation-summary="ModelOnly" class="text-red-600 mb-4"></div>
+        
+        <!-- Campo Oculto para la clave primaria -->
+        <input type="hidden" asp-for="CodAlquiler" />
+
+        <!-- Seleccionar Vivienda -->
+        <div class="mb-4">
+            <label asp-for="CodigoVivienda" class="block text-sm font-medium text-gray-700">Vivienda</label>
+            <select asp-for="CodigoVivienda" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    asp-items="ViewBag.Viviendas">
+                <option value="">-- Seleccionar Vivienda --</option>
+            </select>
+            <span asp-validation-for="CodigoVivienda" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Seleccionar Inquilino -->
+        <div class="mb-4">
+            <label asp-for="Inquilino" class="block text-sm font-medium text-gray-700">Inquilino</label>
+            <select asp-for="Inquilino" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    asp-items="ViewBag.Inquilinos">
+                <option value="">-- Seleccionar Inquilino --</option>
+            </select>
+            <span asp-validation-for="Inquilino" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Seleccionar Propietario -->
+        <div class="mb-4">
+            <label asp-for="Propietario" class="block text-sm font-medium text-gray-700">Propietario</label>
+            <select asp-for="Propietario" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    asp-items="ViewBag.Propietarios">
+                <option value="">-- Seleccionar Propietario --</option>
+            </select>
+            <span asp-validation-for="Propietario" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Seleccionar Estado -->
+        <div class="mb-4">
+            <label asp-for="IdEstado" class="block text-sm font-medium text-gray-700">Estado del Contrato</label>
+            <select asp-for="IdEstado" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    asp-items="ViewBag.Estados">
+                <option value="">-- Seleccionar Estado --</option>
+            </select>
+            <span asp-validation-for="IdEstado" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Fecha de Alquiler -->
+        <div class="mb-4">
+            <label asp-for="FechaAlquiler" class="block text-sm font-medium text-gray-700">Fecha de Alquiler</label>
+            <input asp-for="FechaAlquiler" type="date" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <span asp-validation-for="FechaAlquiler" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Fecha de Inicio -->
+        <div class="mb-4">
+            <label asp-for="FechaInicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio</label>
+            <input asp-for="FechaInicio" type="date" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <span asp-validation-for="FechaInicio" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Fecha de Finalización -->
+        <div class="mb-4">
+            <label asp-for="FechaFinalizacion" class="block text-sm font-medium text-gray-700">Fecha de Finalización</label>
+            <input asp-for="FechaFinalizacion" type="date" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <span asp-validation-for="FechaFinalizacion" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Cuota Mensual -->
+        <div class="mb-4">
+            <label asp-for="CuotaMensual" class="block text-sm font-medium text-gray-700">Cuota Mensual</label>
+            <input asp-for="CuotaMensual" type="number" step="0.01" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <span asp-validation-for="CuotaMensual" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <!-- Depósito de Garantía -->
+        <div class="mb-6">
+            <label asp-for="DepositoGarantia" class="block text-sm font-medium text-gray-700">Depósito de Garantía</label>
+            <input asp-for="DepositoGarantia" type="number" step="0.01" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <span asp-validation-for="DepositoGarantia" class="text-red-600 text-xs mt-1"></span>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                Guardar Cambios
+            </button>
+            <a asp-action="Index" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Volver a la Lista</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,119 @@
+@model AlquilerApp.Models.ViewModels.ReporteGeneralViewModel
+
+@{
+    ViewData["Title"] = "Reporte General";
+}
+
+<div class="container my-5">
+
+    <!-- Título Principal -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Reporte General del Sistema</h1>
+        <p class="text-muted">Resumen de Personas, Viviendas y Alquileres</p>
+    </div>
+
+    <!-- Botones Descargar PDF -->
+    <div class="text-end mb-4">
+        <a class="btn btn-danger btn-lg me-2" href="/Reporte/DescargarPDF">
+            <i class="bi bi-file-earmark-pdf-fill"></i> PDF General
+        </a>
+        <a class="btn btn-primary me-2" href="/Reporte/PersonasPDF">PDF Personas</a>
+        <a class="btn btn-success me-2" href="/Reporte/ViviendasPDF">PDF Viviendas</a>
+        <a class="btn btn-warning" href="/Reporte/AlquileresPDF">PDF Alquileres</a>
+    </div>
+
+    <!-- SECCIÓN PERSONAS -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Personas</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Identidad</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model.Personas)
+                        {
+                            <tr>
+                                <td>@p.NumIdentidad</td>
+                                <td>@p.Nombres @p.Apellidos</td>
+                                <td>@p?.Ciudad?.CiudadNombre</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN VIVIENDAS -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Viviendas</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Dirección</th>
+                            <th>Ciudad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var v in Model.Viviendas)
+                        {
+                            <tr>
+                                <td>@v.CodigoVivienda</td>
+                                <td>@v.DescripcionVivienda</td>
+                                <td>@v?.Ciudad?.CiudadNombre</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN ALQUILERES -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">Alquileres</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Fecha</th>
+                            <th>Inquilino</th>
+                            <th>Propietario</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var a in Model.Alquileres)
+                        {
+                            <tr>
+                                <td>@a.CodAlquiler</td>
+                                <td>@a.FechaAlquiler.ToShortDateString()</td>
+                                <td>@a.InquilinoPersona?.Nombres @a.InquilinoPersona?.Apellidos</td>
+                                <td>@a.PropietarioPersona?.Nombres @a.PropietarioPersona?.Apellidos</td>
+                                <td>@a.Estado?.EstadoNombre</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

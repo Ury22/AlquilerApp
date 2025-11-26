@@ -1,0 +1,38 @@
+@model AlquilerApp.Models.Rol
+
+@{
+    ViewData["Title"] = "Eliminar Rol";
+}
+
+<div class="container my-5">
+    <h1 class="display-4 mb-4 text-danger fw-bold">Eliminar Rol</h1>
+
+    <h3 class="text-secondary mb-4">¿Estás seguro que deseas eliminar el rol: **@Model.RolNombre**?</h3>
+    <p class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i> Esta acción es permanente y puede afectar a las personas asociadas a este rol.
+    </p>
+    <hr />
+    
+    <div class="card shadow-lg p-4 bg-light">
+        <dl class="row">
+            
+            <dt class = "col-sm-3 text-muted">
+                @Html.DisplayNameFor(model => model.RolNombre)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                @Html.DisplayFor(model => model.RolNombre)
+            </dd>
+            
+        </dl>
+    </div>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="IdRol" />
+        <button type="submit" class="btn btn-danger btn-lg shadow-sm">
+            <i class="fas fa-trash-alt"></i> Confirmar Eliminación
+        </button>
+        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm">
+            <i class="fas fa-arrow-left"></i> Cancelar
+        </a>
+    </form>
+</div>

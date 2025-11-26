@@ -1,0 +1,102 @@
+@model IEnumerable<AlquilerApp.Models.Vivienda>
+@{
+ViewData["Title"] = "Listado de Viviendas";
+}
+
+<!-- Contenedor principal con margen superior -->
+
+<div class="container py-5">
+<h1 class="display-5 fw-bold text-dark mb-4">@ViewData["Title"]</h1>
+
+<!-- Botón de Registro -->
+<p class="mb-4">
+    <a asp-action="Create" class="btn btn-primary btn-lg shadow-sm">
+        <i class="fas fa-plus-circle me-2"></i> Registrar Nueva Vivienda
+    </a>
+</p>
+
+<!-- Contenedor responsivo y tarjeta para la tabla -->
+<div class="card shadow-lg rounded-3 border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <!-- Columna 1: Código -->
+                        <th scope="col" class="py-3 px-4">
+                            @Html.DisplayNameFor(model => model.CodigoVivienda)
+                        </th>
+                        <!-- Columna 2: Ubicación -->
+                        <th scope="col" class="py-3 px-4">
+                            Ubicación
+                        </th>
+                        <!-- Columna 3: Capacidad -->
+                        <th scope="col" class="py-3 px-4 text-center">
+                            Capacidad
+                        </th>
+                        <!-- Columna 4: Dormitorios -->
+                        <th scope="col" class="py-3 px-4 text-center">
+                            @Html.DisplayNameFor(model => model.CantDormitorios)
+                        </th>
+                        <!-- Columna 5: Propietario -->
+                        <th scope="col" class="py-3 px-4">
+                            @Html.DisplayNameFor(model => model.PropietarioPersona)
+                        </th>
+                        <!-- Columna 6: Acciones -->
+                        <th scope="col" class="py-3 px-4 text-center">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <!-- Código Vivienda -->
+                            <td class="py-3 px-4 fw-bold">
+                                @Html.DisplayFor(modelItem => item.CodigoVivienda)
+                            </td>
+                            <!-- Ubicación -->
+                            <td class="py-3 px-4 text-secondary">
+                                @Html.DisplayFor(modelItem => item.NumCalle) - Bloque @Html.DisplayFor(modelItem => item.NumBloque)
+                            </td>
+                            <!-- Capacidad -->
+                            <td class="py-3 px-4 text-center">
+                                <span class="badge bg-info text-dark">@Html.DisplayFor(modelItem => item.CapacidadPersonas) pers.</span>
+                            </td>
+                            <!-- Dormitorios -->
+                            <td class="py-3 px-4 text-center">
+                                @Html.DisplayFor(modelItem => item.CantDormitorios) <i class="fas fa-bed text-muted ms-1"></i>
+                            </td>
+                            <!-- Propietario -->
+                            <td class="py-3 px-4">
+                                @(item.PropietarioPersona?.Nombres ?? "N/A") @(item.PropietarioPersona?.Apellidos ?? "")
+                            </td>
+                            <!-- Acciones con texto completo -->
+                            <td class="py-3 px-4 text-center">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.CodigoVivienda" class="btn btn-outline-primary" title="Editar">
+                                        <i class="fas fa-edit me-1"></i> Editar
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.CodigoVivienda" class="btn btn-outline-success" title="Detalles">
+                                        <i class="fas fa-info-circle me-1"></i> Detalles
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.CodigoVivienda" class="btn btn-outline-danger" title="Eliminar">
+                                        <i class="fas fa-trash-alt me-1"></i> Eliminar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+@section Scripts {
+<!-- Aseguramos la carga de Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+}

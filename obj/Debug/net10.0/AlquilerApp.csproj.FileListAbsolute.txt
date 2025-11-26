@@ -1,0 +1,8 @@
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.AssemblyInfo.cs
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.RazorAssemblyInfo.cache
+C:\Users\DELL\Desktop\AlquilerApp\obj\Debug\net10.0\AlquilerApp.RazorAssemblyInfo.cs

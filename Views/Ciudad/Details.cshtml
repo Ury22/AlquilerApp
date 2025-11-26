@@ -1,0 +1,49 @@
+@model AlquilerApp.Models.Ciudad
+
+@{
+    ViewData["Title"] = "Detalles de Ciudad";
+}
+
+<div class="container my-5">
+    <h1 class="display-4 mb-4 text-primary fw-bold">Detalles de Ciudad</h1>
+    <hr />
+    
+    <div class="card shadow-lg p-4 mb-4">
+        <dl class="row">
+            
+            <dt class = "col-sm-3 text-muted">
+                <!-- Muestra "Ciudad" gracias al [Display] en el modelo -->
+                @Html.DisplayNameFor(model => model.CiudadNombre)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                @Html.DisplayFor(model => model.CiudadNombre)
+            </dd>
+            
+            <dt class = "col-sm-3 text-muted">
+                <!-- Muestra "País" gracias al [Display] en el modelo -->
+                @Html.DisplayNameFor(model => model.Pais)
+            </dt>
+            <dd class = "col-sm-9 fw-bold">
+                <!-- CLAVE: Acceso seguro al nombre del país -->
+                @(Model.Pais?.PaisNombre ?? "N/A")
+            </dd>
+            
+            <!-- Opcional: Mostrar IDs si es necesario para depuración -->
+            <dt class = "col-sm-3 text-muted mt-3 pt-3 border-top">
+                ID de Ciudad
+            </dt>
+            <dd class = "col-sm-9 mt-3 pt-3 border-top">
+                @Html.DisplayFor(model => model.IdCiudad)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.IdCiudad" class="btn btn-warning btn-lg shadow-sm">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm">
+            <i class="fas fa-arrow-left"></i> Volver a la Lista
+        </a>
+    </div>
+</div>

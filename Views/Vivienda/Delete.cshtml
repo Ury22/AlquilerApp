@@ -1,0 +1,85 @@
+@model AlquilerApp.Models.Vivienda
+
+@{
+ViewData["Title"] = "Eliminar Vivienda";
+}
+
+<!-- Usamos Bootstrap 5 para el contenedor y el estilo -->
+
+<div class="container py-5">
+<div class="row justify-content-center">
+<!-- Contenedor principal con ancho limitado y sombra -->
+<div class="col-lg-6 col-md-8">
+<div class="card shadow-lg p-4 border-danger rounded-3">
+
+            <div class="card-header bg-danger text-white rounded-top-3">
+                <h1 class="fs-3 fw-bold mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i> @ViewData["Title"]
+                </h1>
+            </div>
+
+            <div class="card-body">
+                <h3 class="fs-5 text-dark mb-4">
+                    ¿Está seguro que desea eliminar esta vivienda permanentemente?
+                </h3>
+
+                <!-- Bloque de detalles de la vivienda a eliminar -->
+                <div class="alert alert-danger p-4 border-2 border-danger rounded-3">
+                    <p class="fw-bold mb-3 text-danger"><i class="fas fa-lock me-1"></i> Información que será eliminada:</p>
+                    
+                    <!-- Lista de Definición (dt/dd) usando la cuadrícula de Bootstrap -->
+                    <dl class="row mb-0">
+                        
+                        <!-- Código de Vivienda (Ocupa el ancho completo) -->
+                        <dt class="col-12 fw-semibold text-dark">@Html.DisplayNameFor(model => model.CodigoVivienda)</dt>
+                        <dd class="col-12 text-danger fs-5 fw-bolder border-bottom pb-2 mb-3">@Html.DisplayFor(model => model.CodigoVivienda)</dd>
+                        
+                        <!-- Propietario (Ocupa el ancho completo) -->
+                        <dt class="col-12 fw-semibold text-dark">@Html.DisplayNameFor(model => model.PropietarioPersona)</dt>
+                        <dd class="col-12 text-dark border-bottom pb-2 mb-3">
+                            @(Model.PropietarioPersona?.Nombres ?? "N/A") @(Model.PropietarioPersona?.Apellidos ?? "")
+                        </dd>
+
+                        <!-- Ubicación (Media columna) -->
+                        <dt class="col-md-6 fw-semibold text-dark">Ubicación</dt>
+                        <dd class="col-md-6 text-dark mb-3">
+                            Calle @Html.DisplayFor(model => model.NumCalle) - Bloque @Html.DisplayFor(model => model.NumBloque)
+                        </dd>
+                        
+                        <!-- Dormitorios (Media columna) -->
+                        <dt class="col-md-6 fw-semibold text-dark">@Html.DisplayNameFor(model => model.CantDormitorios)</dt>
+                        <dd class="col-md-6 text-dark mb-3">
+                            @Html.DisplayFor(model => model.CantDormitorios) <i class="fas fa-bed ms-1"></i>
+                        </dd>
+                    </dl>
+                </div>
+
+                <!-- Formulario de Confirmación -->
+                <form asp-action="Delete" class="mt-4">
+                    <input type="hidden" asp-for="CodigoVivienda" />
+                    
+                    <!-- Botones de Acción (d-grid para responsividad y espacio) -->
+                    <div class="d-flex justify-content-between gap-3 pt-3 border-top">
+                        <!-- Botón de Confirmación -->
+                        <button type="submit" class="btn btn-danger btn-lg flex-grow-1 shadow-sm">
+                            <i class="fas fa-trash-alt me-2"></i> Confirmar Eliminación
+                        </button>
+                        
+                        <!-- Botón de Cancelar -->
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg flex-grow-1 shadow-sm">
+                            <i class="fas fa-arrow-left me-2"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+@section Scripts {
+<!-- Aseguramos la carga de Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+}

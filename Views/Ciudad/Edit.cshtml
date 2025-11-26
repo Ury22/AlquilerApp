@@ -1,0 +1,27 @@
+@model AlquilerApp.Models.Ciudad
+
+<h1>Editar Ciudad</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCiudad" /> <div class="form-group mb-3">
+                <label asp-for="CiudadNombre" class="control-label">Nombre de Ciudad</label>
+                <input asp-for="CiudadNombre" class="form-control" />
+                <span asp-validation-for="CiudadNombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="IdPais" class="control-label">País</label>
+                <select asp-for="IdPais" class="form-control" asp-items="ViewBag.IdPais"></select>
+                <span asp-validation-for="IdPais" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
