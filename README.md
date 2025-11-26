@@ -50,6 +50,20 @@ Set-Location publish
 - Revisa `appsettings.json` y `appsettings.Development.json` para la cadena de conexión (`ConnectionStrings`).
 - Si usas una base de datos local, actualiza la cadena en `appsettings.Development.json` o establece la variable de entorno `ConnectionStrings__DefaultConnection`.
 
+## Respaldo de base de datos
+- En la raíz del repositorio se añadió una carpeta `db-backup/` que contiene un respaldo (backup) para SQL Server (.bak).
+- Antes de ejecutar la aplicación en tu entorno, restaura el backup en tu instancia de SQL Server o importa los datos según tu flujo de trabajo.
+- Actualiza la cadena de conexión en `appsettings.Development.json` (o establece la variable de entorno `ConnectionStrings__DefaultConnection`) para apuntar a tu servidor y base de datos restaurada.
+
+Ejemplo de cadena de conexión (ajusta `SERVER`, `DATABASE`, `USER` y `PASSWORD` según tu entorno):
+```json
+"ConnectionStrings": {
+	"DefaultConnection": "Server=SERVER;Database=DATABASE;User Id=USER;Password=PASSWORD;TrustServerCertificate=True;"
+}
+```
+
+Si necesitas que restaure el backup en una instancia remota o te proporcione pasos detallados para restaurarlo en SQL Server Management Studio (SSMS), dime y te doy los comandos/guía.
+
 ## Consejos y problemas comunes
 - Si ves errores relacionados con dependencias nativas en `bin/` u `obj/`, ejecuta `dotnet clean` y vuelve a compilar.
 - Si `dotnet run` usa un puerto diferente, verifica la URL en la salida de la consola.
