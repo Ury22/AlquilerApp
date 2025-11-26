@@ -114,7 +114,6 @@ git push -u origin main
 
 Notas
 - Se ha añadido un `.gitignore` apropiado para proyectos .NET.
-- Si quieres que yo cree también el repositorio remoto en GitHub, indícame el nombre y si debe ser público o privado (necesitaré acceso/token).
 
 Archivos importantes
 - `AlquilerApp.csproj` — proyecto principal
