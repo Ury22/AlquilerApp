@@ -51,7 +51,7 @@ Set-Location publish
 - Si usas una base de datos local, actualiza la cadena en `appsettings.Development.json` o establece la variable de entorno `ConnectionStrings__DefaultConnection`.
 
 ## Respaldo de base de datos
-- En la raíz del repositorio se añadió una carpeta `db-backup/` que contiene un respaldo (backup) para SQL Server (.bak).
+- En la raíz del repositorio se añadió una carpeta `BackupDB` que contiene un respaldo (backup) para SQL Server (.bak).
 - Antes de ejecutar la aplicación en tu entorno, restaura el backup en tu instancia de SQL Server o importa los datos según tu flujo de trabajo.
 - Actualiza la cadena de conexión en `appsettings.Development.json` (o establece la variable de entorno `ConnectionStrings__DefaultConnection`) para apuntar a tu servidor y base de datos restaurada.
 
